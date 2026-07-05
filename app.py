@@ -3,12 +3,10 @@ from flask_login import LoginManager
 from src.models.user import User
 from src.routes.auth_routes import auth_bp
 from src.routes.finance_routes import finance_bp
-from config import SECRET_KEY
 
 # ---------- Create FLASK application ----------
 app = Flask(__name__)
-#app.secret_key = "secret123"    # Secret key used for session management
-app.secret_key = SECRET_KEY
+app.secret_key = "secret123"    # Secret key used for session management
 
 
 # ---------- Configure FLASK login ----------
