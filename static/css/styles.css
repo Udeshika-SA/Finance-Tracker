@@ -1,0 +1,35 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f7fa;
+}
+
+nav {
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+}

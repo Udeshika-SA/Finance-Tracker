@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <!-- ===================== -->
+    <!-- TRANSACTION SECTION -->
+    <!-- ===================== -->
+    <div class="mb-5">
+
+        <h4 class="text-primary fw-bold mb-3">Add Transaction</h4>
+
+        <div class="card shadow-sm border-0 p-4"
+             style="border-left:5px solid #2563eb; border-radius:12px;">
+
+            <form method="POST" class="row g-3 align-items-end">
+                <input type="hidden" name="action" value="transaction">
+                
+                <!-- Get Types -->
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Type</label>
+                    <select id="typeSelect" class="form-select border-primary" required>
+                        <option value="">Select Type</option>
+                        {% for t in types %}
+                            <option value="{{ t.name }}">{{ t.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Get Categories -->
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Category</label>
+                    <select name="category_id" id="categorySelect"
+                            class="form-select border-primary" required>
+                        <option value="">Select Category</option>
+                    </select>
+                </div>
+
+                <!-- Amount -->
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Amount</label>
+                    <input name="amount"
+                        class="form-control border-primary"
+                        placeholder="Enter amount" required>
+                </div>
+
+                <!-- Add Transaction button -->
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100 fw-semibold shadow-sm">
+                        Add Transaction
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- SAVINGS SECTION -->
+    <!-- ===================== -->
+    <div>
+
+        <h4 class="text-success fw-bold mb-3">Add Savings</h4>
+
+        <div class="card shadow-sm border-0 p-4"
+             style="border-left:5px solid #198754; border-radius:12px;">
+
+            <form method="POST" class="row g-3 align-items-end">
+                <input type="hidden" name="action" value="savings">
+                
+                <!-- Savings Title -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Savings Title</label>
+                    <input name="title"
+                        class="form-control border-success"
+                        placeholder="e.g. Emergency Fund / Travel" required>
+                </div>
+
+                <!-- Amount -->
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Amount</label>
+                    <input name="amount"
+                        class="form-control border-success"
+                        placeholder="Enter amount" required>
+                </div>
+
+                <!-- Button -->
+                <div class="col-md-3">
+                    <button class="btn btn-success w-100 fw-semibold shadow-sm">
+                        Add Savings
+                    </button>
+                </div>
+        
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script>
+const typeSelect = document.getElementById("typeSelect");
+const categorySelect = document.getElementById("categorySelect");
+
+// Flask data
+const categories = {{ categories | tojson }};
+
+typeSelect.addEventListener("change", function () {
+
+    const selectedType = this.value;
+
+    // reset dropdown
+    categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+    // filter categories
+    categories.forEach(cat => {
+
+        if (cat.type === selectedType) {
+
+            const option = document.createElement("option");
+            option.value = cat.id;
+            option.textContent = cat.name;
+
+            categorySelect.appendChild(option);
+        }
+    });
+});
+</script>
+
+
+{% endblock %}

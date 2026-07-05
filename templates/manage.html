@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-primary mb-3">Manage Categories</h3>
+
+
+<!-- ================= -->
+<!-- Add Categories -->
+<!-- ================= -->
+<div class="card p-4 shadow">
+    <form method="POST" class="row g-3">
+
+        <!-- TYPE DROPDOWN -->
+        <div class="col-md-4">
+            <select name="type" class="form-select">
+                <option value="">Select Type</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+        </div>
+
+        <!-- CATEGORY NAME -->
+        <div class="col-md-5">
+            <input name="category_name"
+                class="form-control"
+                placeholder="Category Name" required>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100">
+                Add Category
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+<hr>
+
+
+<!-- ================= -->
+<!-- CATEGORY TABLE -->
+<!-- ================= -->
+<h5 class="text-primary">All Categories</h5>
+
+<table class="table table-hover">
+
+<tr style="background:#eaf2ff;color:#1e3a8a;">
+    <th>Category</th>
+    <th>Type</th>
+    <th>Actions</th>
+</tr>
+
+{% for c in categories %}
+<tr>
+
+<form method="POST"
+      action="{{ url_for('finance.update_category', id=c.id) }}">
+
+    <td>
+        <input name="name"
+               value="{{ c.name }}"
+               class="form-control border-primary">
+    </td>
+
+    <td>
+        <select name="type"
+                class="form-select border-primary">
+
+            <option value="Income"
+                {% if c.type == 'Income' %}selected{% endif %}>
+                Income
+            </option>
+
+            <option value="Expense"
+                {% if c.type == 'Expense' %}selected{% endif %}>
+                Expense
+            </option>
+
+        </select>
+    </td>
+
+    <td>
+        <button type="submit"
+                class="btn btn-sm text-white"
+                style="background:#1e3a8a;">
+            Update
+        </button>
+
+        <a href="{{ url_for('finance.delete_category', id=c.id) }}"
+           class="btn btn-sm btn-danger">
+            Delete
+        </a>
+    </td>
+
+</form>
+
+</tr>
+{% endfor %}
+
+
+</table>
+
+{% endblock %}

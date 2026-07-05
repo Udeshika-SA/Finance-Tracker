@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-primary mb-3">Transaction History</h3>
+
+<div class="card shadow border-0"
+     style="border-left:6px solid #1e3a8a;">
+
+    <div class="table-responsive p-3">
+
+        <table class="table table-hover">
+
+            <thead style="background:#eaf2ff;">
+                <tr style="color:#1e3a8a;">
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for t in transactions %}
+                <tr>
+                    <td>{{ t.type }}</td>
+                    <td>{{ t.category }}</td>
+                    <td>
+                        Rs. {{ t.amount }}
+                    </td>
+                    <td>{{ t.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
