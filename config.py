@@ -1,6 +1,11 @@
-DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "abcd1234",
-    "database": "smartpft_db"
-}
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = int(os.getenv("DB_PORT", 3306))
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_NAME = os.getenv("DB_NAME")
+SECRET_KEY = os.getenv("SECRET_KEY")
